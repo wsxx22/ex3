@@ -34,7 +34,7 @@ public class VehicleApi {
 
     //    wyświetlenie listy pojazdów
     @GetMapping
-    public ResponseEntity<Resources<Vehicle>> showVehicles(){
+    public ResponseEntity<Resources<Vehicle>> getVehicles(){
         vehicleList.forEach(vehicle -> vehicle.add(linkTo(VehicleApi.class).slash(vehicle.getId()).withSelfRel()));
         Link link = linkTo(VehicleApi.class).withSelfRel();
 
@@ -45,7 +45,7 @@ public class VehicleApi {
 
     //    wyświetlenie pojazdu o określonym id
     @GetMapping(path="/{id}")
-    public ResponseEntity<Resource<Vehicle>> getVehicle(@PathVariable long id){
+    public ResponseEntity<Resource<Vehicle>> getVehicleById(@PathVariable long id){
         return vehicleList.stream()
                 .filter(vehicle -> vehicle.getVehicleId() == id).findFirst()
                 .map(vehicle -> {
